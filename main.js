@@ -1,18 +1,20 @@
-require(['Chart', 'quicksort', 'helpers'], function(Chart, quicksort, helpers) {
+require(['Chart', 'quicksort', 'helpers', 'quicksortVitaly'], function(Chart, quicksort, helpers, quicksortVitaly) {
 	var Chart = Chart.noConflict();
 	var arguments = {
 			values: [],
-			times: []
+			times: [],
+			vitalyTimes: []
 		},
 		shift = 0, delta = 50000,
 		valueArrays = [],
 		length = 20,
-		times = [];
+		times = [],
+		vitalyTimes = [];
 
 	for(var i = 0; i <= length; ++i) {
 		arguments.values[i] = i * delta + shift;
 	}
-
+	
 	for(var i = 1; i <= length; ++i) {
 		valueArrays[i] = [];
 		for(var j = 0; j < arguments.values[i]; ++j) {
@@ -27,6 +29,15 @@ require(['Chart', 'quicksort', 'helpers'], function(Chart, quicksort, helpers) {
 		
 		times[i].finish = new Date();
 		arguments.times[i] = times[i].finish - times[i].start;
+
+		vitalyTimes[i] = {
+			start: new Date()
+		};
+
+		quicksortVitaly.sort(valueArrays[i]);
+		
+		vitalyTimes[i].finish = new Date();
+		arguments.vitalyTimes[i] = vitalyTimes[i].finish - vitalyTimes[i].start;
 	}
 
 	console.log(arguments);
@@ -35,7 +46,7 @@ require(['Chart', 'quicksort', 'helpers'], function(Chart, quicksort, helpers) {
 		labels : arguments.values,
 		datasets : [
 			{
-				label: "My First dataset",
+				label: "Kroosh",
 				fillColor : "rgba(220,220,220,0.2)",
 				strokeColor : "rgba(220,220,220,1)",
 				pointColor : "rgba(220,220,220,1)",
@@ -43,9 +54,18 @@ require(['Chart', 'quicksort', 'helpers'], function(Chart, quicksort, helpers) {
 				pointHighlightFill : "#fff",
 				pointHighlightStroke : "rgba(220,220,220,1)",
 				data : arguments.times
+			},
+			{
+				label: "Mykhalko",
+				fillColor : "rgba(110,110,110,0.2)",
+				strokeColor : "rgba(110,110,110,1)",
+				pointColor : "rgba(110,110,110,1)",
+				pointStrokeColor : "#fff",
+				pointHighlightFill : "#fff",
+				pointHighlightStroke : "rgba(220,220,220,1)",
+				data : arguments.vitalyTimes
 			}
 		]
-
 	}
 
 	var ctx = document.getElementById("myChart").getContext("2d");
