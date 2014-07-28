@@ -27,9 +27,12 @@ define("quicksort", ['helpers'], function(helpers) {
 	* @return Array - sorted array
 	*/
 	var _partition = function(source, start, end) {
+		'use strict';
+
 		if(start < end) {
 			var pivotIndex = helpers.randomInt(start, end),
-				i = j = start + 1,
+				i = start + 1,
+				j = start + 1,
 				pivot = start;
 				
 			helpers.swap(source, start, pivotIndex);

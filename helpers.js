@@ -1,5 +1,7 @@
 define('helpers', [], function() {
 	var _swap = function(source, i, j) {
+		'use strict';
+
 		if(i != j && _isInRange(source, i) && _isInRange(source, j)) {
 			source[i] += source[j];
 			source[j] = source[i] - source[j];
@@ -8,6 +10,8 @@ define('helpers', [], function() {
 	};
 
 	var _isInRange = function(source, i) {
+		'use strict';
+		
 		return i < source.length && i >= 0;
 	}
 
