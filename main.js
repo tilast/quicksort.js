@@ -1,15 +1,13 @@
-require(['Chart', 'quicksort', 'helpers', 'quicksortVitaly'], function(Chart, quicksort, helpers, quicksortVitaly) {
+require(['Chart', 'quicksort', 'helpers'], function(Chart, quicksort, helpers) {
 	var Chart = Chart.noConflict();
 	var arguments = {
 			values: [],
-			times: [],
-			vitalyTimes: []
+			times: []
 		},
 		shift = 0, delta = 50000,
 		valueArrays = [],
 		length = 20,
-		times = [],
-		vitalyTimes = [];
+		times = [];
 
 	for(var i = 0; i <= length; ++i) {
 		arguments.values[i] = i * delta + shift;
@@ -29,15 +27,6 @@ require(['Chart', 'quicksort', 'helpers', 'quicksortVitaly'], function(Chart, qu
 		
 		times[i].finish = new Date();
 		arguments.times[i] = times[i].finish - times[i].start;
-
-		vitalyTimes[i] = {
-			start: new Date()
-		};
-
-		quicksortVitaly.sort(valueArrays[i]);
-		
-		vitalyTimes[i].finish = new Date();
-		arguments.vitalyTimes[i] = vitalyTimes[i].finish - vitalyTimes[i].start;
 	}
 
 	console.log(arguments);
